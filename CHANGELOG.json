@@ -38,20 +38,35 @@
     },
     {
       "version": "v0.1.0",
-      "date": "2026-02-10",
+      "date": "2026-01-11",
       "highlights": [
         { "description": "Initial release of OmniVault provider for 1Password" }
       ],
       "added": [
-        { "description": "OmniVault `vault.Vault` interface implementation for 1Password" },
-        { "description": "Full CRUD operations (Get, Set, Delete, Exists, List)" },
-        { "description": "Batch operations support (GetBatch, SetBatch, DeleteBatch)" },
-        { "description": "Multi-field item support with automatic field type inference" },
-        { "description": "TOTP code generation and extraction" },
-        { "description": "Flexible path formats including native `op://` references" },
-        { "description": "Vault and item name-to-ID resolution with caching" },
-        { "description": "Tag support with key:value formatting" },
-        { "description": "Comprehensive error mapping to OmniVault error types" }
+        { "description": "OmniVault `vault.Vault` interface implementation for 1Password", "commit": "51b4163" },
+        { "description": "Full CRUD operations (Get, Set, Delete, Exists, List)", "commit": "51b4163" },
+        { "description": "Batch operations support (GetBatch, SetBatch, DeleteBatch)", "commit": "51b4163" },
+        { "description": "Multi-field item support with automatic field type inference", "commit": "51b4163" },
+        { "description": "TOTP code generation and extraction", "commit": "51b4163" },
+        { "description": "Flexible path formats including native `op://` references", "commit": "51b4163" },
+        { "description": "Vault and item name-to-ID resolution with caching", "commit": "51b4163" },
+        { "description": "Tag support with key:value formatting", "commit": "51b4163" },
+        { "description": "Comprehensive error mapping to OmniVault error types", "commit": "51b4163" }
+      ],
+      "tests": [
+        { "description": "Unit tests for conversion, path parsing, and configuration", "commit": "e6fffc0" },
+        { "description": "Integration tests for 1Password provider operations", "commit": "e6fffc0" }
+      ],
+      "documentation": [
+        { "description": "README with usage examples, path formats, and API reference", "commit": "8f54ec5" }
+      ],
+      "infrastructure": [
+        { "description": "GitHub Actions CI workflow for testing and linting", "commit": "def96be" },
+        { "description": "GolangCI-Lint configuration", "commit": "def96be" }
+      ],
+      "dependencies": [
+        { "description": "Add `github.com/1password/onepassword-sdk-go` v0.4.0", "commit": "51b4163" },
+        { "description": "Add `github.com/agentplexus/omnivault` v0.2.0", "commit": "74dca37" }
       ]
     }
   ]
