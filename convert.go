@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	op "github.com/1password/onepassword-sdk-go"
-	"github.com/agentplexus/omnivault/vault"
+	"github.com/plexusone/omnivault/vault"
 )
 
 // itemToSecret converts a 1Password Item to an OmniVault Secret.

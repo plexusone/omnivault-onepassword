@@ -3,7 +3,7 @@ package onepassword
 import (
 	"context"
 
-	"github.com/agentplexus/omnivault/vault"
+	"github.com/plexusone/omnivault/vault"
 )
 
 // GetBatch retrieves multiple secrets in a single operation.

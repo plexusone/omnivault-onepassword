@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/agentplexus/omnivault/vault"
+	"github.com/plexusone/omnivault/vault"
 )
 
 // mapError converts 1Password SDK errors to OmniVault errors.

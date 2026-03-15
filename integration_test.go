@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/agentplexus/omnivault/vault"
+	"github.com/plexusone/omnivault/vault"
 )
 
 // Integration tests require:

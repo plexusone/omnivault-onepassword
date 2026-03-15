@@ -19,8 +19,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/agentplexus/omnivault"
-	op "github.com/agentplexus/omnivault-onepassword"
+	"github.com/plexusone/omnivault"
+	op "github.com/plexusone/omnivault-onepassword"
 )
 
 func main() {

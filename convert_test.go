@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	op "github.com/1password/onepassword-sdk-go"
-	"github.com/agentplexus/omnivault/vault"
+	"github.com/plexusone/omnivault/vault"
 )
 
 func TestInferFieldType(t *testing.T) {

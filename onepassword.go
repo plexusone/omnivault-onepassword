@@ -34,7 +34,7 @@ import (
 	"sync"
 
 	op "github.com/1password/onepassword-sdk-go"
-	"github.com/agentplexus/omnivault/vault"
+	"github.com/plexusone/omnivault/vault"
 )
 
 // Provider implements vault.Vault for 1Password.
@@ -122,7 +122,7 @@ func (p *Provider) Get(ctx context.Context, path string) (*vault.Secret, error) 
 func (p *Provider) resolveField(ctx context.Context, parsed *ParsedPath) (*vault.Secret, error) {
 	ref := parsed.SecretReference()
 
-	value, err := p.client.Secrets.Resolve(ctx, ref)
+	value, err := p.client.Secrets().Resolve(ctx, ref)
 	if err != nil {
 		return nil, mapError("Get", parsed.String(), err)
 	}
@@ -150,7 +150,7 @@ func (p *Provider) getItem(ctx context.Context, parsed *ParsedPath) (*vault.Secr
 		return nil, mapError("Get", parsed.String(), err)
 	}
 
-	item, err := p.client.Items.Get(ctx, vaultID, itemID)
+	item, err := p.client.Items().Get(ctx, vaultID, itemID)
 	if err != nil {
 		return nil, mapError("Get", parsed.String(), err)
 	}
@@ -203,7 +203,7 @@ func (p *Provider) createItem(ctx context.Context, vaultID string, parsed *Parse
 		params.Tags = tagsToStrings(secret.Metadata.Tags)
 	}
 
-	_, err := p.client.Items.Create(ctx, params)
+	_, err := p.client.Items().Create(ctx, params)
 	if err != nil {
 		return mapError("Set", parsed.String(), err)
 	}
@@ -214,7 +214,7 @@ func (p *Provider) createItem(ctx context.Context, vaultID string, parsed *Parse
 // updateItem updates an existing item in 1Password.
 func (p *Provider) updateItem(ctx context.Context, vaultID, itemID string, parsed *ParsedPath, secret *vault.Secret) error {
 	// Get existing item
-	item, err := p.client.Items.Get(ctx, vaultID, itemID)
+	item, err := p.client.Items().Get(ctx, vaultID, itemID)
 	if err != nil {
 		return mapError("Set", parsed.String(), err)
 	}
@@ -248,7 +248,7 @@ func (p *Provider) updateItem(ctx context.Context, vaultID, itemID string, parse
 		item.Tags = tagsToStrings(secret.Metadata.Tags)
 	}
 
-	_, err = p.client.Items.Put(ctx, item)
+	_, err = p.client.Items().Put(ctx, item)
 	if err != nil {
 		return mapError("Set", parsed.String(), err)
 	}
@@ -290,7 +290,7 @@ func (p *Provider) Delete(ctx context.Context, path string) error {
 		return mapError("Delete", path, err)
 	}
 
-	err = p.client.Items.Delete(ctx, vaultID, itemID)
+	err = p.client.Items().Delete(ctx, vaultID, itemID)
 	if err != nil {
 		// Ignore not found errors
 		if isNotFoundError(err) {
@@ -349,42 +349,25 @@ func (p *Provider) List(ctx context.Context, prefix string) ([]string, error) {
 	var results []string
 
 	// Get all vaults
-	vaultsIter, err := p.client.Vaults.ListAll(ctx)
+	vaults, err := p.client.Vaults().List(ctx)
 	if err != nil {
 		return nil, mapError("List", prefix, err)
 	}
 
-	for {
-		v, err := vaultsIter.Next()
-		if err == op.ErrorIteratorDone {
-			break
-		}
-		if err != nil {
-			return nil, mapError("List", prefix, err)
-		}
-
+	for _, v := range vaults {
 		// Filter by prefix if it specifies a vault
 		if prefix != "" && !strings.HasPrefix(v.Title, prefix) && !strings.HasPrefix(prefix, v.Title+"/") {
 			continue
 		}
 
 		// List items in vault
-		itemsIter, err := p.client.Items.ListAll(ctx, v.ID)
+		items, err := p.client.Items().List(ctx, v.ID)
 		if err != nil {
 			// Skip vaults we can't access
 			continue
 		}
 
-		for {
-			item, err := itemsIter.Next()
-			if err == op.ErrorIteratorDone {
-				break
-			}
-			if err != nil {
-				// Skip items we can't iterate
-				break
-			}
-
+		for _, item := range items {
 			path := fmt.Sprintf("%s/%s", v.Title, item.Title)
 			if prefix == "" || strings.HasPrefix(path, prefix) {
 				results = append(results, path)
@@ -450,20 +433,12 @@ func (p *Provider) resolveVaultID(ctx context.Context, nameOrID string) (string,
 	p.vaultMu.RUnlock()
 
 	// List vaults to find the match
-	vaultsIter, err := p.client.Vaults.ListAll(ctx)
+	vaults, err := p.client.Vaults().List(ctx)
 	if err != nil {
 		return "", err
 	}
 
-	for {
-		v, err := vaultsIter.Next()
-		if err == op.ErrorIteratorDone {
-			break
-		}
-		if err != nil {
-			return "", err
-		}
-
+	for _, v := range vaults {
 		// Cache all vault IDs while we're at it
 		p.cacheVaultID(v.Title, v.ID)
 
@@ -483,20 +458,12 @@ func (p *Provider) resolveItemID(ctx context.Context, vaultID, nameOrID string) 
 	}
 
 	// List items to find the match
-	itemsIter, err := p.client.Items.ListAll(ctx, vaultID)
+	items, err := p.client.Items().List(ctx, vaultID)
 	if err != nil {
 		return "", err
 	}
 
-	for {
-		item, err := itemsIter.Next()
-		if err == op.ErrorIteratorDone {
-			break
-		}
-		if err != nil {
-			return "", err
-		}
-
+	for _, item := range items {
 		if item.ID == nameOrID || item.Title == nameOrID {
 			return item.ID, nil
 		}
