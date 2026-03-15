@@ -1,0 +1,58 @@
+{
+  "irVersion": "1.0",
+  "project": "omnivault-onepassword",
+  "repository": "https://github.com/plexusone/omnivault-onepassword",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["plexusone", "johncwang@gmail.com"],
+  "releases": [
+    {
+      "version": "v0.2.0",
+      "date": "2026-03-14",
+      "highlights": [
+        { "description": "Module migrated to new GitHub organization: `github.com/plexusone/omnivault-onepassword`" },
+        { "description": "Updated for 1Password SDK v0.4.0 API breaking changes" }
+      ],
+      "breaking": [
+        { "description": "Module path changed from `github.com/agentplexus/omnivault-onepassword` to `github.com/plexusone/omnivault-onepassword`", "commit": "84c7f51" }
+      ],
+      "upgradeGuide": [
+        { "description": "Update import paths from `github.com/agentplexus/omnivault-onepassword` to `github.com/plexusone/omnivault-onepassword`" },
+        { "description": "Run `go get github.com/plexusone/omnivault-onepassword@v0.2.0` to fetch new module" }
+      ],
+      "changed": [
+        { "description": "SDK API calls updated from field access to method calls (`client.Items` to `client.Items()`)", "commit": "84c7f51" },
+        { "description": "List operations changed from iterator pattern to direct slice returns", "commit": "84c7f51" }
+      ],
+      "dependencies": [
+        { "description": "Update `github.com/plexusone/omnivault` from v0.2.2 to v0.3.0", "commit": "84c7f51" },
+        { "description": "Maintain compatibility with `github.com/1password/onepassword-sdk-go` v0.4.0", "commit": "84c7f51" }
+      ],
+      "documentation": [
+        { "description": "Update README badges and shields for new organization", "commit": "25de397" }
+      ],
+      "infrastructure": [
+        { "description": "Migrate CI workflows to shared workflow references", "commit": "3501cc0" },
+        { "description": "Rename workflows for consistency: `go-ci.yaml`, `go-lint.yaml`, `go-sast-codeql.yaml`", "commit": "6f9ec32" }
+      ]
+    },
+    {
+      "version": "v0.1.0",
+      "date": "2026-02-10",
+      "highlights": [
+        { "description": "Initial release of OmniVault provider for 1Password" }
+      ],
+      "added": [
+        { "description": "OmniVault `vault.Vault` interface implementation for 1Password" },
+        { "description": "Full CRUD operations (Get, Set, Delete, Exists, List)" },
+        { "description": "Batch operations support (GetBatch, SetBatch, DeleteBatch)" },
+        { "description": "Multi-field item support with automatic field type inference" },
+        { "description": "TOTP code generation and extraction" },
+        { "description": "Flexible path formats including native `op://` references" },
+        { "description": "Vault and item name-to-ID resolution with caching" },
+        { "description": "Tag support with key:value formatting" },
+        { "description": "Comprehensive error mapping to OmniVault error types" }
+      ]
+    }
+  ]
+}
