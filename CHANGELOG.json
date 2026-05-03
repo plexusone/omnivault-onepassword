@@ -1,11 +1,36 @@
 {
   "irVersion": "1.0",
-  "project": "omnivault-onepassword",
-  "repository": "https://github.com/plexusone/omnivault-onepassword",
+  "project": "omni-onepassword",
+  "repository": "https://github.com/plexusone/omni-onepassword",
   "versioning": "semver",
   "commitConvention": "conventional",
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
+    {
+      "version": "v0.3.0",
+      "date": "2026-05-03",
+      "highlights": [
+        { "description": "Renamed to `omni-onepassword` following the omni-<provider> pattern" },
+        { "description": "Restructured as monorepo with `omnivault/` subdirectory" }
+      ],
+      "breaking": [
+        { "description": "Module path changed from `github.com/plexusone/omnivault-onepassword` to `github.com/plexusone/omni-onepassword`" },
+        { "description": "Import path changed to `github.com/plexusone/omni-onepassword/omnivault`" }
+      ],
+      "upgradeGuide": [
+        { "description": "Update import paths from `github.com/plexusone/omnivault-onepassword` to `github.com/plexusone/omni-onepassword/omnivault`" },
+        { "description": "Run `go get github.com/plexusone/omni-onepassword/omnivault@v0.3.0`" }
+      ],
+      "changed": [
+        { "description": "Provider code moved to `omnivault/` subdirectory" },
+        { "description": "Examples moved to `omnivault/examples/`" },
+        { "description": "Integration name changed from `omnivault-onepassword` to `omni-onepassword`" }
+      ],
+      "documentation": [
+        { "description": "Add root README.md following omni-aws pattern" },
+        { "description": "Update omnivault/README.md with new import paths" }
+      ]
+    },
     {
       "version": "v0.2.0",
       "date": "2026-03-14",
