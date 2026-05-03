@@ -1,4 +1,4 @@
-// Example: Using omnivault-onepassword with OmniVault resolver
+// Example: Using omni-onepassword/omnivault with OmniVault resolver
 //
 // This example demonstrates how to use the 1Password provider with
 // the OmniVault resolver for URI-based secret access.
@@ -19,8 +19,8 @@ import (
 	"log"
 	"os"
 
+	op "github.com/plexusone/omni-onepassword/omnivault"
 	"github.com/plexusone/omnivault"
-	op "github.com/plexusone/omnivault-onepassword"
 )
 
 func main() {

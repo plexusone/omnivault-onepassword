@@ -1,4 +1,4 @@
-// Example: Basic usage of omnivault-onepassword
+// Example: Basic usage of omni-onepassword/omnivault
 //
 // This example demonstrates how to use the 1Password provider for basic
 // secret operations: get, set, list, and delete.
@@ -19,7 +19,7 @@ import (
 	"log"
 	"os"
 
-	op "github.com/plexusone/omnivault-onepassword"
+	op "github.com/plexusone/omni-onepassword/omnivault"
 	"github.com/plexusone/omnivault/vault"
 )
 

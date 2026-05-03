@@ -15,7 +15,7 @@ const (
 	EnvServiceAccountToken = "OP_SERVICE_ACCOUNT_TOKEN" //nolint:gosec // G101: this is an env var name, not a credential
 
 	// DefaultIntegrationName identifies this integration to 1Password.
-	DefaultIntegrationName = "omnivault-onepassword"
+	DefaultIntegrationName = "omni-onepassword"
 
 	// DefaultIntegrationVersion is the default version string.
 	DefaultIntegrationVersion = "0.1.0"
@@ -39,7 +39,7 @@ type Config struct {
 	ServiceAccountToken string
 
 	// IntegrationName identifies this integration to 1Password.
-	// Default: "omnivault-onepassword"
+	// Default: "omni-onepassword"
 	IntegrationName string
 
 	// IntegrationVersion is the version of this integration.

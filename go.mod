@@ -1,4 +1,4 @@
-module github.com/plexusone/omnivault-onepassword
+module github.com/plexusone/omni-onepassword
 
 go 1.25.5
 
